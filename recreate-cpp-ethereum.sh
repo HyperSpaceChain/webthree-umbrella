@@ -12,7 +12,9 @@ outputDirectory=../cpp-ethereum-recreated
 
 rm    -rf $outputDirectory
 mkdir -p  $outputDirectory
-mkdir -p  $outputDirectory/test/
+mkdir -p  $outputDirectory/test/libethereum/
+mkdir -p  $outputDirectory/test/libweb3core/
+mkdir -p  $outputDirectory/test/webthree/
 
 # alethzero intentionally omitted
 rsync -r ./dependency_graph/              $outputDirectory/dependency_graph/
@@ -28,38 +30,13 @@ rsync -r ./libethereum/libethcore/        $outputDirectory/libethcore/
 rsync -r ./libethereum/libethereum/       $outputDirectory/libethereum/
 rsync -r ./libethereum/libevm/            $outputDirectory/libevm/
 rsync -r ./libethereum/libevmcore/        $outputDirectory/libevmcore/
-rsync -r ./libethereum/libnatspec/        $outputDirectory/libnatspec/
-rsync -r ./libethereum/libtestutils/      $outputDirectory/libtestutils/
-rsync -r ./libethereum/test/deprecated/             $outputDirectory/test/deprecated/
-rsync -r ./libethereum/test/external-dependencies/  $outputDirectory/test/external-dependencies/
-rsync -r ./libethereum/test/fuzzTesting/            $outputDirectory/test/fuzzTesting/
-rsync -r ./libethereum/test/libethcore/             $outputDirectory/test/libethcore/
-rsync -r ./libethereum/test/libethereum/            $outputDirectory/test/libethereum/
-rsync -r ./libethereum/test/libevm/                 $outputDirectory/test/libevm/
-rsync -r ./libethereum/test/libnatspec/             $outputDirectory/test/libnatspec/
-rsync -r ./libethereum/test/libweb3core/            $outputDirectory/test/libweb3core/
-rsync -r ./libethereum/test/BlockChainHelper.cpp    $outputDirectory/test/BlockChainHelper.cpp
-rsync -r ./libethereum/test/BlockChainHelper.h      $outputDirectory/test/BlockChainHelper.h
-rsync -r ./libethereum/test/boostTest.cpp           $outputDirectory/test/boostTest.cpp
-rsync -r ./libethereum/test/JSON_test.sol           $outputDirectory/test/JSON_test.sol
-rsync -r ./libethereum/test/JsonSpiritHeaders.h     $outputDirectory/test/JsonSpiritHeaders.h
-rsync -r ./libethereum/test/Stats.cpp               $outputDirectory/test/Stats.cpp
-rsync -r ./libethereum/test/Stats.h                 $outputDirectory/test/Stats.h
-rsync -r ./libethereum/test/TestHelper.cpp          $outputDirectory/test/TestHelper.cpp
-rsync -r ./libethereum/test/TestHelper.h            $outputDirectory/test/TestHelper.h
-rsync -r ./libethereum/test/TestUtils.cpp           $outputDirectory/test/TestUtils.cpp
-rsync -r ./libethereum/test/TestUtils.h             $outputDirectory/test/TestUtils.h
+rsync -r ./libethereum/test/              $outputDirectory/test/libethereum/test/
 rsync -r ./libweb3core/bench/             $outputDirectory/bench/
 rsync -r ./libweb3core/libdevcore/        $outputDirectory/libdevcore/
 rsync -r ./libweb3core/libdevcrypto/      $outputDirectory/libdevcrypto/
 rsync -r ./libweb3core/libp2p/            $outputDirectory/libp2p/
 rsync -r ./libweb3core/rlp/               $outputDirectory/rlp/
-rsync -r ./libweb3core/test/libdevcore/   $outputDirectory/test/libdevcore/
-rsync -r ./libweb3core/test/libdevcrypto/ $outputDirectory/test/libdevcrypto/
-rsync -r ./libweb3core/test/libp2p/       $outputDirectory/test/libp2p/
-rsync -r ./libweb3core/test/memorydb.cpp  $outputDirectory/test/memorydb.cpp
-rsync -r ./libweb3core/test/overlaydb.cpp $outputDirectory/test/overlaydb.cpp
-# libweb3core/test/test.cpp and test.h intentionally omitted because they clash with boosttest.cpp from libethereum/test.
+rsync -r ./libweb3core/test/              $outputDirectory/test/libweb3core/test/
 # mix intentionally omitted
 # res intentionally omitted
 # solidity intentionally omitted
@@ -68,9 +45,7 @@ rsync -r ./webthree/eth/                  $outputDirectory/eth/
 rsync -r ./webthree/libweb3jsonrpc/       $outputDirectory/libweb3jsonrpc/
 rsync -r ./webthree/libwebthree/          $outputDirectory/libwebthree/
 rsync -r ./webthree/libwhisper/           $outputDirectory/libwhisper/
-rsync -r ./webthree/test/ethrpctest/      $outputDirectory/test/ethrpctest/
-rsync -r ./webthree/test/libweb3jsonrpc/  $outputDirectory/test/libweb3jsonrpc/
-rsync -r ./webthree/test/libwhisper/      $outputDirectory/test/libwhisper/
+rsync -r ./webthree/test/                 $outputDirectory/test/webthree/test/
 rsync -r ./webthree-helpers/cmake/        $outputDirectory/cmake/
 rsync -r ./webthree-helpers/extdep/       $outputDirectory/extdep/
 rsync -r ./webthree-helpers/homebrew/     $outputDirectory/homebrew/
@@ -88,7 +63,6 @@ rsync -r ./webthree-helpers/utils/        $outputDirectory/utils/
 # CMakeLists.txt intentionally omitted.
 rsync -r ./CodingStandards.txt            $outputDirectory/CodingStandards.txt
 rsync -r ./CONTRIBUTING.md                $outputDirectory/CONTRIBUTING.md
-rsync -r ./GPLV3_LICENSE                  $outputDirectory/GPLV3_LICENSE
 rsync -r ./LICENSE                        $outputDirectory/LICENSE
 # qtcreator-style intentionally omitted.
 # README.md intentionally omitted.
@@ -100,17 +74,18 @@ rsync -r ./sync.sh                        $outputDirectory/sync.sh
 curl https://raw.githubusercontent.com/bobsummerwill/cpp-ethereum/merge_repos/cmake/EthOptions.cmake > $outputDirectory/cmake/EthOptions.cmake
 curl https://raw.githubusercontent.com/bobsummerwill/cpp-ethereum/merge_repos/CMakeLists.txt > $outputDirectory/CMakeLists.txt
 curl https://raw.githubusercontent.com/bobsummerwill/cpp-ethereum/merge_repos/README.md > $outputDirectory/README.md
-curl https://raw.githubusercontent.com/bobsummerwill/cpp-ethereum/merge_repos/test/CMakeLists.txt > $outputDirectory/test/CMakeLists.txt
 
 # These files could be upstreamed, but it isn't worth doing so, because they can only be used after the repo reorganization.
+curl https://raw.githubusercontent.com/bobsummerwill/cpp-ethereum/merge_repos/.gitignore > $outputDirectory/.gitignore
+curl https://raw.githubusercontent.com/bobsummerwill/cpp-ethereum/merge_repos/.gitmodules > $outputDirectory/.gitmodules
 curl https://raw.githubusercontent.com/bobsummerwill/cpp-ethereum/merge_repos/.travis.yml > $outputDirectory/.travis.yml
 curl https://raw.githubusercontent.com/bobsummerwill/cpp-ethereum/merge_repos/appveyor.yml > $outputDirectory/appveyor.yml
-curl https://raw.githubusercontent.com/bobsummerwill/cpp-ethereum/merge_repos/circle.yml > $outputDirectory/circle.yml
-curl https://raw.githubusercontent.com/bobsummerwill/cpp-ethereum/merge_repos/setup.sh > $outputDirectory/setup.sh
+curl https://raw.githubusercontent.com/bobsummerwill/cpp-ethereum/merge_repos/install_deps.bat > $outputDirectory/install_deps.bat
+curl https://raw.githubusercontent.com/bobsummerwill/cpp-ethereum/merge_repos/install_deps.sh > $outputDirectory/install_deps.sh
 
-# TODO - evmjit submodule will need "hooking up", for now we'll just git clone it into a local directory to get
+# TODO - evmjit and deps submodules will need "hooking up", for now we'll just git clone them into local directories to get
 # the content we need for testing.
-git clone https://github.com/ethereum/evmjit $outputDirectory/evmjit
+#git clone https://github.com/ethereum/cpp_dependencies $outputDirectory/deps
+#git clone https://github.com/ethereum/evmjit $outputDirectory/evmjit
 
 # TODO - Move Contributing and coding standards to http://ethdocs.org
-# TODO - Where will qtcreator-style go?   Ditto for res folder.
